@@ -14,18 +14,55 @@ public class MainPage {
  */
 
 
-
     // кнопка «Войти в аккаунт» - локатор
-    private final By enterAccount = By.xpath(".//button[text()='Войти в аккаунт']");
-
+    private final By enterAccountButton = By.xpath(".//button[text()='Войти в аккаунт']");
 
     //кнопка «Личный кабинет»
-    private final By enterProfile = By.xpath(".//a[@href='/account']");
+    private final By enterProfileLink = By.xpath(".//a[@href='/account']");
+    // click reference
 
 //    переходы к разделам «Булки»,«Соусы»,  «Начинки».
-    private final By divisionSauce = By.xpath(".//span[text()='Соусы']");
-    private final By divisionBun = By.xpath(".//span[text()='Булки']");
-    private final By divisionFilling = By.xpath(".//span[text()='Начинки']");
+    private final By divisionSauceLink = By.xpath(".//span[text()='Соусы']");
+    private final By divisionBunLink = By.xpath(".//span[text()='Булки']");
+    private final By divisionFillingLink = By.xpath(".//span[text()='Начинки']");
+    // click buttons
+
+    // ссылка на КОнструктор
+    private final By constructorLink = By.xpath(".//a/p[text()='Конструктор']");
+    // найти такой a, у которого в дочернем теге есть текст "Конструктор"
+
+
+    public MainPage(WebDriver driver) {
+        this.driver = driver;}
+
+    public void clickConstructorLink(){
+        driver.findElement(constructorLink).click();
+    }
+
+
+    // click button Войт в аккаунт
+    public void clickEnterAccountButton(){
+        driver.findElement(enterAccountButton).click();
+    }
+
+    // click button Личный кабинет
+    public void clickEnterProfileLink(){
+        driver.findElement(enterProfileLink).click();
+    }
+
+
+    public void clickDivisionSauceLink(){
+        driver.findElement(divisionSauceLink).click();
+    }
+
+    public void clickDivisionBunLink(){
+        driver.findElement(divisionBunLink).click();
+    }
+
+    public void clickDivisionFillingLink(){
+        driver.findElement(divisionFillingLink).click();
+    }
+
 
 
 
@@ -83,21 +120,11 @@ https://stellarburgers.nomoreparties.site/ingredient/61c0c5a71d1f82001bdaaa78
 
 какие нужны объекты и методы
 
-Страница регистрации
-поля имя, почта, пароль
-кнопка Зарегистрироваться и по ней переход на страницу логина
-
-
-Восстановление пароля
-ввод почты
-кнопка Восстановить
 
 
 
-Личный кабинет
-кнопка Выход
-кнопка Конструктор
-логотип
+
+
 
 Андрей
 userAR001@mail.ru 1-8
