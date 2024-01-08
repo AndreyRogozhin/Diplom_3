@@ -3,6 +3,9 @@ package org.example;
 import org.junit.rules.ExternalResource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+import java.time.Duration;
 
 public class BrowserRule extends ExternalResource {
 
@@ -14,9 +17,17 @@ public class BrowserRule extends ExternalResource {
 
     @Override
     protected void before() {
-        driver = new ChromeDriver();
+        //driver = new ChromeDriver();
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+
+        driver = new ChromeDriver(options);
+        //TimeUnit timeUnit = ;
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3),);
+
         // перешли на страницу тестового приложения
-        driver.get(Url.MAIN_PAGE);
+        //driver.get(Url.MAIN_PAGE);
     }
 
     @Override

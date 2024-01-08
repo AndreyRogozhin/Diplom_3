@@ -1,9 +1,6 @@
 package org.example;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 public class RegisterPage {
     private WebDriver driver;
@@ -16,11 +13,11 @@ public class RegisterPage {
 
  */
 
-    private final By name = By.xpath(".//input[text()='Зарегистрироваться']");
-    private final By email = By.xpath(".//input[text()='Зарегистрироваться']");
-    private final By password = By.xpath(".//input[text()='Зарегистрироваться']");
+    private final By name = By.xpath(".//label[text()='Имя']/parent::*/input");
+    private final By email = By.xpath(".//label[text()='Email']/parent::*/input");
+    private final By password = By.xpath(".//label[text()='Пароль']/parent::*/input");
 
-    private final By passwordErrorMessage = By.xpath(".//input[text()='Некорректный пароль']");
+    private final By passwordErrorMessage = By.xpath(".//p[text()='Некорректный пароль']");
 
 
     // кнопка «Войти в аккаунт» - локатор
@@ -39,18 +36,30 @@ public class RegisterPage {
         driver.findElement(this.email).sendKeys(email);
     }
 
+    public void setPassword(String password){
+        driver.findElement(this.password).sendKeys(password);
+    }
+
+
+    public void openRegisterPage(String registerPageUrl){
+        driver.get(registerPageUrl);
+    }
+
     public boolean passwordErrorMessageFound(){
         Boolean result;
-        driver.findElement(passwordErrorMessage) ;
-        return false;
+        try {
+            driver.findElement(passwordErrorMessage);
+        }
+        catch (NoSuchElementException exception)
+        {
+           return false;
+        }
+        return true;
     }
 
     public RegisterPage(WebDriver driver) {
         this.driver = driver;}
 
-    public void setPassword(String password){
-        driver.findElement(this.password).sendKeys(password);
-    }
 
 
 

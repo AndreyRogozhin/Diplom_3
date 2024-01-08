@@ -30,5 +30,17 @@ public class RecoverPasswordPage {
         driver.findElement(this.email).sendKeys(email);
     }
 
+    private final By loginLink = By.xpath(".//a[@href='/login']");
+
+    public void clickLoginLink(){
+        driver.findElement(loginLink).click();
+    }
+
+    public void openRecoverPasswordPage (String recoverPasswordPageUrl){
+        driver.get(recoverPasswordPageUrl);
+    }
+
+
+
 
 }

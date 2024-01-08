@@ -28,7 +28,7 @@ public class MainPage {
     // click buttons
 
     // ссылка на КОнструктор
-    private final By constructorLink = By.xpath(".//a/p[text()='Конструктор']");
+    private final By constructorLink = By.xpath(".//p[text()='Конструктор']//parent::a");
     // найти такой a, у которого в дочернем теге есть текст "Конструктор"
 
 
@@ -61,6 +61,10 @@ public class MainPage {
 
     public void clickDivisionFillingLink(){
         driver.findElement(divisionFillingLink).click();
+    }
+
+    public boolean checkMainPageShown (String mainPageUrl){
+        return  driver.getCurrentUrl().equals( mainPageUrl);
     }
 
 

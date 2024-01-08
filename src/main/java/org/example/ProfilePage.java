@@ -17,13 +17,13 @@ public class ProfilePage {
     private final By logoutButton = By.xpath(".//button[text()='Выход']");
 
     // ссылка на КОнструктор
-    private final By constructorLink = By.xpath(".//a/p[text()='Конструктор']");
+    private final By constructorLink = By.xpath(".//p[text()='Конструктор']/parent::a");
     // найти такой a, у которого в дочернем теге есть текст "Конструктор"
 
 
     // переход на главную строницу по нажатию на логотип
-    private final By stellarBurgersLink = By.xpath(".//a/p[text()='Конструктор']");
-    // пока непонятно, как искать этот элемент
+    private final By stellarBurgersLink = By.xpath(".//a[@href='/']");
+
 
     public void stellarBurgersLink(){
         driver.findElement(stellarBurgersLink).click();
@@ -37,6 +37,9 @@ public class ProfilePage {
         driver.findElement(logoutButton).click();
     }
 
+    public boolean checkProfilePageShown (String profilePageUrl){
+        return  driver.getCurrentUrl().equals( profilePageUrl);
+    }
 
     public ProfilePage(WebDriver driver) {
         this.driver = driver;}

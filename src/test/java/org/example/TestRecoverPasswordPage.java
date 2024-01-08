@@ -1,16 +1,16 @@
 package org.example;
 
-import org.example.*;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Rule;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 
-public class TestRegisterPage {
+public class TestRecoverPasswordPage {
 
 
     private WebDriver driver;
-    String registerPageUrl = Url.REGISTER_PAGE;
+    String recoverPasswordPageUrl = Url.REGISTER_PAGE;
     String loginPageUrl = Url.LOGIN_PAGE;
 
 
@@ -18,26 +18,19 @@ public class TestRegisterPage {
     public BrowserRule browserRule = new BrowserRule();
 
     @Test
-    public void runTestRegisterPageOK()  {
+    public void runTestRecoverPasswordPageOK()  {
 
 
 //        driver.get(registerPageUrl);
 
 
 //        MainPage objMainPage = new MainPage(browserRule.getWebDriver());
-        RegisterPage objRegisterPage = new RegisterPage(browserRule.getWebDriver());
+        RecoverPasswordPage objRecoverPasswordPage = new RecoverPasswordPage(browserRule.getWebDriver());
         LoginPage objLoginPage = new LoginPage(browserRule.getWebDriver());
-        objRegisterPage.openRegisterPage(registerPageUrl);
+        objRecoverPasswordPage.openRecoverPasswordPage(recoverPasswordPageUrl);
 
-        // проверить переход по нажатию на кнопку Зарегистрироваться
-        // нужно придумать случайное имя пользователя, почту и пароль. Пароль - длинный, более 5 символов
-        objRegisterPage.setEmail("www2@yandex.ru");
-        objRegisterPage.setPassword("ffffff");
-        objRegisterPage.setName("fff");
 
-        objRegisterPage.clickRegisterButton();
-
-        // !!!! после успешной регистрации нужно удалить пользователя !!!
+        objRecoverPasswordPage.clickLoginLink();
 
 
         // дождаться открытия страницы
