@@ -1,5 +1,6 @@
 package org.example;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -18,6 +19,7 @@ public class TestRecoverPasswordPage {
     public BrowserRule browserRule = new BrowserRule();
 
     @Test
+    @Step("Вход через кнопку в форме восстановления пароля")
     public void runTestRecoverPasswordPageOK()  {
 
         RecoverPasswordPage objRecoverPasswordPage = new RecoverPasswordPage(browserRule.getWebDriver());

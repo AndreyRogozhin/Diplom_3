@@ -27,9 +27,9 @@ public class MainPage {
     private final By divisionFillingLink = By.xpath(".//span[text()='Начинки']");
     // click buttons
 
-    // ссылка на КОнструктор
+    // ссылка на Конструктор
     private final By constructorLink = By.xpath(".//p[text()='Конструктор']//parent::a");
-    // найти такой a, у которого в дочернем теге есть текст "Конструктор"
+    // найти такой <a>, у которого в дочернем теге есть текст "Конструктор"
 
 
     public MainPage(WebDriver driver) {
@@ -63,6 +63,12 @@ public class MainPage {
         driver.findElement(divisionFillingLink).click();
     }
 
+
+    public void openMainPage (String mainPageUrl){
+        driver.get(mainPageUrl);
+    }
+
+
     public boolean checkMainPageShown (String mainPageUrl){
         return  driver.getCurrentUrl().equals( mainPageUrl);
     }
@@ -70,48 +76,14 @@ public class MainPage {
 
 
 
+
     /*
-    //раздел "Вопросы о важном"  - локатор раздела
-   private final By listOfFAQ = By.className("Home_FAQ__3uVm4");
-
-   public MainPage(WebDriver driver) {
-        this.driver = driver;}
-
-
-//  нажатие верхней кнопки "Заказать"
-   public void clickOrderUpperButton(){
-        driver.findElement(orderUpperButton).click();
-    }
-
-
-    // прокрутить до нижней кнопки "Заказать"
-    public void scrollToOrderLowerButton(){
-        WebElement element = driver.findElement(orderLowerButton);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();",element);
-    }
 
     // прокрутить до вопросов о важном
    public void scrollToListOfFAQ(){
        WebElement element = driver.findElement(listOfFAQ);
        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();",element);
    }
-
-   public String findAnswerByQuestion(String questionText){
-       By question = By.xpath(".//div[@class='accordion__button' and text()='"+ questionText +"']");
-       driver.findElement(question).click();
-       String attrib = driver.findElement(question).getAttribute("id");
-       int idNum = attrib.lastIndexOf("-");
-       String idNumStr = attrib.substring(idNum+1);
-       String attribAnswer = "accordion__panel-" + idNumStr;
-       String answerXPath = ".//div[@id='"+attribAnswer+"']/p";
-
-       By answer = By.xpath(answerXPath);
-
-       return driver.findElement(answer).getText() ;
-
-   }
-
-
 
 
 основные страницы и объекты
@@ -122,18 +94,33 @@ https://stellarburgers.nomoreparties.site/ingredient/61c0c5a71d1f82001bdaaa78
  «Булки»,«Соусы»,  «Начинки».
 
 
-какие нужны объекты и методы
 
 
 
 
++Успешную регистрацию.
++Ошибку для некорректного пароля. Минимальный пароль — шесть символов.
+
+вход по кнопке «Войти в аккаунт» на главной,
+вход через кнопку «Личный кабинет»,
++вход через кнопку в форме регистрации,
++вход через кнопку в форме восстановления пароля.
 
 
-
-Андрей
-userAR001@mail.ru 1-8
+Проверь переход по клику на «Личный кабинет».
 
 
++ 	Проверь переход по клику на «Конструктор»
++и на логотип Stellar Burgers.
+
+Выход из аккаунта
++Проверь выход по кнопке «Выйти» в личном кабинете.
+
+Раздел «Конструктор»
+Проверь, что работают переходы к разделам:
+«Булки»,
+«Соусы»,
+«Начинки».
 
 
 */

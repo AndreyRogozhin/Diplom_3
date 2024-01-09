@@ -25,7 +25,7 @@ public class ProfilePage {
     private final By stellarBurgersLink = By.xpath(".//a[@href='/']");
 
 
-    public void stellarBurgersLink(){
+    public void clickStellarBurgersLink(){
         driver.findElement(stellarBurgersLink).click();
     }
 
@@ -43,6 +43,10 @@ public class ProfilePage {
 
     public ProfilePage(WebDriver driver) {
         this.driver = driver;}
+
+    public void openProfilePage (String profilePageUrl){
+        driver.get(profilePageUrl);
+    }
 
 
 
