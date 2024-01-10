@@ -17,7 +17,8 @@ public class BrowserRule extends ExternalResource {
 
     @Override
     protected void before() {
-        //driver = new ChromeDriver();
+        //
+        // driver = new ChromeDriver();
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");

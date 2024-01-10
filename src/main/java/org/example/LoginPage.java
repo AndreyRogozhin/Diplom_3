@@ -29,9 +29,9 @@ public class LoginPage {
         driver.findElement(enterButton).click();
     }
 
-
-
-
+    public void openLoginPage (String loginPageUrl){
+        driver.get(loginPageUrl);
+    }
 
 
     //   .//input[@name="name"]

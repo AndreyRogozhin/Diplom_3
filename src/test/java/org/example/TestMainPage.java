@@ -36,4 +36,42 @@ public class TestMainPage {
     }
 
 
+    @Test
+    @Step("Переход на закладку Булки")
+    public void runTestClickBunTab() throws InterruptedException {
+// сначала надо создать клиента и авторизоваться
+        MainPage objMainPage = new MainPage(browserRule.getWebDriver());
+
+        objMainPage.openMainPage(mainPageUrl);
+        objMainPage.clickDivisionBunTab();
+
+        Assert.assertTrue("Не получился переход на булки", objMainPage.tabBunIsCurrent());
+    }
+
+    @Test
+    @Step("Переход на закладку Соусы")
+    public void runTestClickSauceTab() throws InterruptedException {
+// сначала надо создать клиента и авторизоваться
+        MainPage objMainPage = new MainPage(browserRule.getWebDriver());
+
+        objMainPage.openMainPage(mainPageUrl);
+        objMainPage.clickDivisionSauceTab();
+
+        Assert.assertTrue("Не получился переход на соусы", objMainPage.tabSauceIsCurrent());
+    }
+
+    @Test
+    @Step("Переход на закладку Начинки")
+    public void runTestClickFillingTab() throws InterruptedException {
+// сначала надо создать клиента и авторизоваться
+        MainPage objMainPage = new MainPage(browserRule.getWebDriver());
+
+        objMainPage.openMainPage(mainPageUrl);
+        objMainPage.clickDivisionFillingTab();
+
+        Assert.assertTrue("Не получился переход на начинки", objMainPage.tabFillingIsCurrent());
+    }
+
+
+
 }

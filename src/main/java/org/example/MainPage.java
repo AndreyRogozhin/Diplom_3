@@ -1,9 +1,11 @@
 package org.example;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class MainPage {
     private WebDriver driver;
@@ -22,14 +24,23 @@ public class MainPage {
     // click reference
 
 //    переходы к разделам «Булки»,«Соусы»,  «Начинки».
-    private final By divisionSauceLink = By.xpath(".//span[text()='Соусы']");
-    private final By divisionBunLink = By.xpath(".//span[text()='Булки']");
-    private final By divisionFillingLink = By.xpath(".//span[text()='Начинки']");
+    private final By divisionSauceTab = By.xpath(".//span[text()='Соусы']");
+//        private final By divisionBunTab = By.xpath(".//span[text()='Булки']/parent::div");
+    private final By divisionBunTab = By.xpath(".//span[text()='Булки']");
+
+    private final By divisionFillingTab = By.xpath(".//span[text()='Начинки']");
     // click buttons
 
     // ссылка на Конструктор
     private final By constructorLink = By.xpath(".//p[text()='Конструктор']//parent::a");
     // найти такой <a>, у которого в дочернем теге есть текст "Конструктор"
+
+
+
+    private final By currentBunTab = By.xpath(".//div[contains(@class,'tab_tab_type_current__2BEPc' )]/span[text()='Булки']");
+    private final By currentSauceTab = By.xpath(".//div[contains(@class,'tab_tab_type_current__2BEPc' )]/span[text()='Соусы']");
+    private final By currentFillingTab = By.xpath(".//div[contains(@class,'tab_tab_type_current__2BEPc' )]/span[text()='Начинки']");
+
 
 
     public MainPage(WebDriver driver) {
@@ -50,18 +61,34 @@ public class MainPage {
         driver.findElement(enterProfileLink).click();
     }
 
+    public void clickDivisionSauceTab() throws InterruptedException {
 
-    public void clickDivisionSauceLink(){
-        driver.findElement(divisionSauceLink).click();
+        Thread.sleep(500,0);
+        WebElement element = driver.findElement(divisionSauceTab);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).click().build().perform();
+
+//        driver.findElement(divisionSauceTab).click();
     }
 
-    public void clickDivisionBunLink(){
-        driver.findElement(divisionBunLink).click();
+    public void clickDivisionBunTab() throws InterruptedException {
+        WebElement element = driver.findElement(divisionBunTab);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).click().build().perform();
+
+       //driver.findElement(divisionBunTab).click();
     }
 
-    public void clickDivisionFillingLink(){
-        driver.findElement(divisionFillingLink).click();
+    public void clickDivisionFillingTab() throws InterruptedException {
+        //    driver.findElement(divisionFillingTab).click();
+        Thread.sleep(500,0);
+        WebElement element = driver.findElement(divisionFillingTab);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).click().build().perform();
+
     }
+
+
 
 
     public void openMainPage (String mainPageUrl){
@@ -70,12 +97,50 @@ public class MainPage {
 
 
     public boolean checkMainPageShown (String mainPageUrl){
-        return  driver.getCurrentUrl().equals( mainPageUrl);
+        boolean found =  driver.getCurrentUrl().equals( mainPageUrl);
+        return found;
+    }
+
+
+    public boolean tabBunIsCurrent(){
+        Boolean result;
+        try {
+            driver.findElement(currentBunTab);
+        }
+        catch (NoSuchElementException exception)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean tabFillingIsCurrent(){
+        Boolean result;
+        try {
+            driver.findElement(currentFillingTab);
+        }
+        catch (NoSuchElementException exception)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean tabSauceIsCurrent(){
+        Boolean result;
+        try {
+            driver.findElement(currentSauceTab);
+        }
+        catch (NoSuchElementException exception)
+        {
+            return false;
+        }
+        return true;
     }
 
 
 
-
+//    .//div[contains(class,'tab_tab_type_current__2BEPc' )]/span[text()='Соусы']
 
     /*
 
@@ -84,44 +149,6 @@ public class MainPage {
        WebElement element = driver.findElement(listOfFAQ);
        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();",element);
    }
-
-
-основные страницы и объекты
-
-
-
-https://stellarburgers.nomoreparties.site/ingredient/61c0c5a71d1f82001bdaaa78
- «Булки»,«Соусы»,  «Начинки».
-
-
-
-
-
-
-+Успешную регистрацию.
-+Ошибку для некорректного пароля. Минимальный пароль — шесть символов.
-
-вход по кнопке «Войти в аккаунт» на главной,
-вход через кнопку «Личный кабинет»,
-+вход через кнопку в форме регистрации,
-+вход через кнопку в форме восстановления пароля.
-
-
-Проверь переход по клику на «Личный кабинет».
-
-
-+ 	Проверь переход по клику на «Конструктор»
-+и на логотип Stellar Burgers.
-
-Выход из аккаунта
-+Проверь выход по кнопке «Выйти» в личном кабинете.
-
-Раздел «Конструктор»
-Проверь, что работают переходы к разделам:
-«Булки»,
-«Соусы»,
-«Начинки».
-
 
 */
 }
