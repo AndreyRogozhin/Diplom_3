@@ -76,11 +76,11 @@ public class MainPage {
         Actions actions = new Actions(driver);
         actions.moveToElement(element).click().build().perform();
 
-       //driver.findElement(divisionBunTab).click();
+//       driver.findElement(divisionBunTab).click();
     }
 
     public void clickDivisionFillingTab() throws InterruptedException {
-        //    driver.findElement(divisionFillingTab).click();
+//            driver.findElement(divisionFillingTab).click();
         Thread.sleep(500,0);
         WebElement element = driver.findElement(divisionFillingTab);
         Actions actions = new Actions(driver);

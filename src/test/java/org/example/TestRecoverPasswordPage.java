@@ -11,7 +11,7 @@ public class TestRecoverPasswordPage {
 
 
     private WebDriver driver;
-    String recoverPasswordPageUrl = Url.REGISTER_PAGE;
+    String recoverPasswordPageUrl = Url.RECOVER_PASSWORD_PAGE;
     String loginPageUrl = Url.LOGIN_PAGE;
 
 
@@ -20,6 +20,7 @@ public class TestRecoverPasswordPage {
 
     @Test
     @Step("Вход через кнопку в форме восстановления пароля")
+    // это для неавторизованного пользователя, но он должен быть создан
     public void runTestRecoverPasswordPageOK()  {
 
         RecoverPasswordPage objRecoverPasswordPage = new RecoverPasswordPage(browserRule.getWebDriver());

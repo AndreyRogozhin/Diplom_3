@@ -1,4 +1,4 @@
-package org.example;
+package org.example.apiobject;
 
 public class Credentials {
 

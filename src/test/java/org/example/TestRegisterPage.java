@@ -1,10 +1,19 @@
 package org.example;
 
 import io.qameta.allure.Step;
+import io.restassured.RestAssured;
+import org.example.apiobject.Credentials;
+import org.example.apiobject.User;
+import org.example.apiobject.UserClient;
+import io.restassured.response.Response;
 import org.example.*;
+import org.example.apiobject.UserClient;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import static io.restassured.RestAssured.*;
+import static org.example.apiobject.UserGenerator.randomUser;
 
 
 public class TestRegisterPage {
@@ -16,6 +25,7 @@ public class TestRegisterPage {
     String loginPageUrl = Url.LOGIN_PAGE;
 
 
+
     @Rule
     public BrowserRule browserRule = new BrowserRule();
 
@@ -23,7 +33,16 @@ public class TestRegisterPage {
     @Step("Успешная регистрация")
     public void runTestRegisterPageOK()  {
 
+        RestAssured.baseURI = Url.MAIN_PAGE;
+        User user = randomUser();
 
+        UserClient userClient = new UserClient();
+        Response response;
+        Credentials credentials = user.credsFromUser();
+        /*credentials.setEmail("TestRogozhinUser@yandex.ru");
+        credentials.setPassword("ffffff");
+        credentials.setName("fff");
+*/
 //        driver.get(registerPageUrl);
 
 
@@ -34,9 +53,9 @@ public class TestRegisterPage {
 
         // проверить переход по нажатию на кнопку Зарегистрироваться
         // нужно придумать случайное имя пользователя, почту и пароль. Пароль - длинный, более 5 символов
-        objRegisterPage.setEmail("www2@yandex.ru");
-        objRegisterPage.setPassword("ffffff");
-        objRegisterPage.setName("fff");
+        objRegisterPage.setEmail(credentials.getEmail());
+        objRegisterPage.setPassword(credentials.getPassword());
+        objRegisterPage.setName(credentials.getName());
 
         objRegisterPage.clickRegisterButton();
 
@@ -46,6 +65,11 @@ public class TestRegisterPage {
         // дождаться открытия страницы
         // проверить, что открылась страница с первой формой для заполнения
         Assert.assertTrue("Не открылась страница авторизации",objLoginPage.checkLoginPageShown (loginPageUrl));
+
+        response = userClient.login(credentials );
+        String token = response.path("accessToken");
+        response = userClient.delete(token);
+
 
     }
 
@@ -71,6 +95,7 @@ public class TestRegisterPage {
         // дождаться открытия страницы
         // проверить, что открылась страница с первой формой для заполнения
         Assert.assertTrue("Нет сообщения об ошибке!",objRegisterPage.passwordErrorMessageFound());
+
 
     }
 

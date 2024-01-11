@@ -15,7 +15,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 
-import static org.example.UserGenerator.randomUser;
+import static org.example.apiobject.UserGenerator.randomUser;
 //import org.openqa.selenium.remote.Response;
 
 public class TestLoginPage {
@@ -30,12 +30,10 @@ public class TestLoginPage {
     String mainPageUrl = Url.MAIN_PAGE;
     String loginPageUrl = Url.LOGIN_PAGE;
     String token;
-
-
     private Response response;
     private UserClient userClient;
-    private org.example.User user;
-    private org.example.Credentials credentials, cred2;
+    private org.example.apiobject.User user;
+    private org.example.apiobject.Credentials credentials, cred2;
 
 
     //@Rule

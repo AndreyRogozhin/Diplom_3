@@ -35,7 +35,7 @@ public class TestProfilePage {
     }
 
     @Test
-    @Step("Проверь переход по клику на «Конструктор» в личном кабинете и на логотип Stellar Burgers")
+    @Step("Проверь переход по клику на «Конструктор» в личном кабинете")
     public void runTestConstructorLink()  {
 // сначала надо создать клиента и авторизоваться
         ProfilePage objProfilePage = new ProfilePage(browserRule.getWebDriver());

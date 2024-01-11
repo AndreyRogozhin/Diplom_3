@@ -1,4 +1,4 @@
-package org.example;
+package org.example.apiobject;
 
 import static org.example.Utils.randomString;
 

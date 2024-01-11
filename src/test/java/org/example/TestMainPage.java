@@ -20,8 +20,28 @@ public class TestMainPage {
 
     @Test
     @Step("Вход по кнопке «Войти в аккаунт»")
-    public void runTestClickEnterProfileLink()  {
-// сначала надо создать клиента и авторизоваться
+    public void runTestClickEnterAccountLink()  {
+// это для неавторизованного пользователя, но он должен быть создан
+
+        MainPage objMainPage = new MainPage(browserRule.getWebDriver());
+        LoginPage objLoginPage = new LoginPage(browserRule.getWebDriver());
+
+
+        objMainPage.openMainPage(mainPageUrl);
+        objMainPage.clickEnterAccountButton();
+
+
+        // дождаться открытия страницы
+        // проверить, что открылась страница с первой формой для заполнения
+        Assert.assertTrue("Не открылась страница авторизации",objLoginPage.checkLoginPageShown(loginPageUrl));
+    }
+
+
+    @Test
+    @Step("Вход по кнопке «Войти в личный кабинет»")
+    public void runTestClickProfileLink()  {
+// это для неавторизованного пользователя, но он должен быть создан
+
         MainPage objMainPage = new MainPage(browserRule.getWebDriver());
         LoginPage objLoginPage = new LoginPage(browserRule.getWebDriver());
 
@@ -34,6 +54,9 @@ public class TestMainPage {
         // проверить, что открылась страница с первой формой для заполнения
         Assert.assertTrue("Не открылась страница авторизации",objLoginPage.checkLoginPageShown(loginPageUrl));
     }
+
+
+
 
 
     @Test
@@ -72,6 +95,9 @@ public class TestMainPage {
         Assert.assertTrue("Не получился переход на начинки", objMainPage.tabFillingIsCurrent());
     }
 
+    public void tearDown() {
+        driver.quit();
+    }
 
 
 }

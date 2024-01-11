@@ -3,8 +3,8 @@ package org.example.apiobject;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.example.Credentials;
-import org.example.User;
+import org.example.apiobject.Credentials;
+import org.example.apiobject.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,10 +40,10 @@ public class UserClient {
 
 
     @Step ("Авторизация пользователя с учётными данными {credentials}")
-    public Response login (Credentials credentials, String token ) {
+    public Response login (Credentials credentials/*, String token*/ ) {
         Response response =  given()
                 .header("Content-type", "application/json")
-                .header("accessToken", token)
+                //.header("accessToken", token)
                 .body(credentials)
                 .when()
                 .post(LOGIN_URL);
@@ -51,6 +51,17 @@ public class UserClient {
         return response;
     }
 
+    @Step ("Получение данных пользователя")
+    public Response read ( Credentials credentials, String token ) {
+        Response response= given()
+                .header("Content-type", "application/json")
+                .header("Authorization", token)
+                .body(credentials)
+                .when()
+                .get(EDIT_URL);
+
+        return  response;
+    }
 
 
     @Step ("Удаление клиента")
