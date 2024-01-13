@@ -10,18 +10,15 @@ import org.openqa.selenium.WebDriver;
 public class TestRecoverPasswordPage {
 
 
-    private WebDriver driver;
-    String recoverPasswordPageUrl = Url.RECOVER_PASSWORD_PAGE;
-    String loginPageUrl = Url.LOGIN_PAGE;
-
-
     @Rule
     public BrowserRule browserRule = new BrowserRule();
+    String recoverPasswordPageUrl = Url.RECOVER_PASSWORD_PAGE;
+    String loginPageUrl = Url.LOGIN_PAGE;
+    private WebDriver driver;
 
     @Test
     @Step("Вход через кнопку в форме восстановления пароля")
-    // это для неавторизованного пользователя, но он должен быть создан
-    public void runTestRecoverPasswordPageOK()  {
+    public void runTestRecoverPasswordPageOK() {
 
         RecoverPasswordPage objRecoverPasswordPage = new RecoverPasswordPage(browserRule.getWebDriver());
         LoginPage objLoginPage = new LoginPage(browserRule.getWebDriver());
@@ -29,10 +26,6 @@ public class TestRecoverPasswordPage {
 
 
         objRecoverPasswordPage.clickLoginLink();
-
-
-        // дождаться открытия страницы
-        // проверить, что открылась страница с первой формой для заполнения
-        Assert.assertTrue("Не открылась страница авторизации",objLoginPage.checkLoginPageShown (loginPageUrl));
+        Assert.assertTrue("Не открылась страница авторизации", objLoginPage.checkLoginPageShown(loginPageUrl));
     }
 }

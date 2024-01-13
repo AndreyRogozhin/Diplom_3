@@ -2,36 +2,32 @@ package org.example;
 
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import org.example.apiobject.Credentials;
 import org.example.apiobject.User;
 import org.example.apiobject.UserClient;
-import io.restassured.response.Response;
-import org.example.*;
-import org.example.apiobject.UserClient;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Rule;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import static io.restassured.RestAssured.*;
 import static org.example.apiobject.UserGenerator.randomUser;
+
 
 
 public class TestRegisterPage {
 
 
-    private WebDriver driver;
+    @Rule
+    public BrowserRule browserRule = new BrowserRule();
     String registerPageUrl = Url.REGISTER_PAGE;
     String mainPageUrl = Url.MAIN_PAGE;
     String loginPageUrl = Url.LOGIN_PAGE;
-
-
-
-    @Rule
-    public BrowserRule browserRule = new BrowserRule();
+    private WebDriver driver;
 
     @Test
     @Step("Успешная регистрация")
-    public void runTestRegisterPageOK()  {
+    public void runTestRegisterPageOK() {
 
         RestAssured.baseURI = Url.MAIN_PAGE;
         User user = randomUser();
@@ -39,34 +35,22 @@ public class TestRegisterPage {
         UserClient userClient = new UserClient();
         Response response;
         Credentials credentials = user.credsFromUser();
-        /*credentials.setEmail("TestRogozhinUser@yandex.ru");
-        credentials.setPassword("ffffff");
-        credentials.setName("fff");
-*/
-//        driver.get(registerPageUrl);
 
 
-//        MainPage objMainPage = new MainPage(browserRule.getWebDriver());
         RegisterPage objRegisterPage = new RegisterPage(browserRule.getWebDriver());
         LoginPage objLoginPage = new LoginPage(browserRule.getWebDriver());
         objRegisterPage.openRegisterPage(registerPageUrl);
 
-        // проверить переход по нажатию на кнопку Зарегистрироваться
-        // нужно придумать случайное имя пользователя, почту и пароль. Пароль - длинный, более 5 символов
         objRegisterPage.setEmail(credentials.getEmail());
         objRegisterPage.setPassword(credentials.getPassword());
         objRegisterPage.setName(credentials.getName());
 
         objRegisterPage.clickRegisterButton();
+        objLoginPage.waitForLoadLoginPage();
 
-        // !!!! после успешной регистрации нужно удалить пользователя !!!
+        Assert.assertTrue("Не открылась страница авторизации", objLoginPage.checkLoginPageShown(loginPageUrl));
 
-
-        // дождаться открытия страницы
-        // проверить, что открылась страница с первой формой для заполнения
-        Assert.assertTrue("Не открылась страница авторизации",objLoginPage.checkLoginPageShown (loginPageUrl));
-
-        response = userClient.login(credentials );
+        response = userClient.login(credentials);
         String token = response.path("accessToken");
         response = userClient.delete(token);
 
@@ -75,46 +59,41 @@ public class TestRegisterPage {
 
     @Test
     @Step("Ошибка регистрации по причине слишком короткого пароля")
-    public void runTestRegisterPageBadPassword()  {
+    public void runTestRegisterPageBadPassword() {
 
-//        MainPage objMainPage = new MainPage(browserRule.getWebDriver());
         RegisterPage objRegisterPage = new RegisterPage(browserRule.getWebDriver());
         LoginPage objLoginPage = new LoginPage(browserRule.getWebDriver());
         objRegisterPage.openRegisterPage(registerPageUrl);
 
-        // проверить переход по нажатию на кнопку Зарегистрироваться
 
         String registerPageUrl = Url.REGISTER_PAGE;
 
-        // нужно придумать случайное имя пользователя, почту и пароль. Пароль - короткий, менее 6 символов
         objRegisterPage.setEmail("www2@yandex.ru");
         objRegisterPage.setName("fff");
         objRegisterPage.setPassword("fff");
 
         objRegisterPage.clickRegisterButton();
-        // дождаться открытия страницы
-        // проверить, что открылась страница с первой формой для заполнения
-        Assert.assertTrue("Нет сообщения об ошибке!",objRegisterPage.passwordErrorMessageFound());
+        Assert.assertTrue("Нет сообщения об ошибке!", objRegisterPage.passwordErrorMessageFound());
 
 
     }
 
     @Test
     @Step("Вход через кнопку в форме регистрации")
-    public void runTestLogotypeLink()  {
-// сначала надо создать клиента и авторизоваться
+    public void runTestEnterButtonLink() {
         RegisterPage objRegisterPage = new RegisterPage(browserRule.getWebDriver());
         MainPage objMainPage = new MainPage(browserRule.getWebDriver());
+        LoginPage objLoginPage = new LoginPage(browserRule.getWebDriver());
+
         ProfilePage objProfilePage = new ProfilePage(browserRule.getWebDriver());
         objRegisterPage.openRegisterPage(registerPageUrl);
 
-        objProfilePage.clickStellarBurgersLink();
+        objRegisterPage.clickEnterButton();
+        objLoginPage.waitForLoadLoginPage();
 
-        // дождаться открытия страницы
-        // проверить, что открылась страница с первой формой для заполнения
-        Assert.assertTrue("Не открылась главная страница",objMainPage.checkMainPageShown(mainPageUrl));
+        Assert.assertTrue("Не открылась страница авторизации", objLoginPage.checkLoginPageShown(loginPageUrl));
+
     }
-
 
 
 }
