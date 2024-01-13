@@ -62,30 +62,31 @@ public class MainPage {
     }
 
     public void clickDivisionSauceTab() throws InterruptedException {
-
+/*
         Thread.sleep(500,0);
         WebElement element = driver.findElement(divisionSauceTab);
         Actions actions = new Actions(driver);
         actions.moveToElement(element).click().build().perform();
-
-//        driver.findElement(divisionSauceTab).click();
+*/
+        driver.findElement(divisionSauceTab).click();
     }
 
     public void clickDivisionBunTab() throws InterruptedException {
+/*
         WebElement element = driver.findElement(divisionBunTab);
         Actions actions = new Actions(driver);
         actions.moveToElement(element).click().build().perform();
-
-//       driver.findElement(divisionBunTab).click();
+*/
+       driver.findElement(divisionBunTab).click();
     }
 
     public void clickDivisionFillingTab() throws InterruptedException {
-//            driver.findElement(divisionFillingTab).click();
-        Thread.sleep(500,0);
+            driver.findElement(divisionFillingTab).click();
+/*        Thread.sleep(500,0);
         WebElement element = driver.findElement(divisionFillingTab);
         Actions actions = new Actions(driver);
         actions.moveToElement(element).click().build().perform();
-
+*/
     }
 
 
