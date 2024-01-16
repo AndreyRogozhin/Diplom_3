@@ -25,15 +25,11 @@ public class TestLoginPage {
     private Response response;
     private UserClient userClient;
     private org.example.apiobject.User user;
-    private org.example.apiobject.Credentials credentials, cred2;
 
     public WebDriver getWebDriver() {
         return driver;
     }
 
-
-    //@Rule
-    //public BrowserRule browserRule = new BrowserRule();
 
     @Before
     public void setUp() {

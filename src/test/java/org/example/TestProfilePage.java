@@ -20,7 +20,6 @@ import static org.example.apiobject.UserGenerator.randomUser;
 public class TestProfilePage {
 
 
-    String profilePageUrl = Url.PROFILE_PAGE;
     String accountPageUrl = Url.ACCOUNT_PAGE;
     String mainPageUrl = Url.MAIN_PAGE;
     String loginPageUrl = Url.LOGIN_PAGE;
@@ -37,9 +36,6 @@ public class TestProfilePage {
         return driver;
     }
 
-//    @Rule
-//    public BrowserRule browserRule = new BrowserRule();
-
     @Before
     public void setUp() {
 
@@ -48,8 +44,6 @@ public class TestProfilePage {
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(7));
-//        new WebDriverWait(driver, 3)
-//                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[text() = 'Получить ссылку на маршрут']")));
 
 
         RestAssured.baseURI = Url.MAIN_PAGE;
@@ -59,7 +53,6 @@ public class TestProfilePage {
         response = userClient.create(user);
         token = response.path("accessToken");
         credentials = user.credsFromUser();
-//        response = userClient.login(credentials );
 
         objLoginPage = new LoginPage(getWebDriver());
         objMainPage = new MainPage(getWebDriver());
@@ -81,7 +74,6 @@ public class TestProfilePage {
     @Test
     @Step("Выход по кнопке «Выйти» в личном кабинете")
     public void runTestLogoutButton() {
-// сначала надо создать клиента и авторизоваться
         ProfilePage objProfilePage = new ProfilePage(getWebDriver());
         objProfilePage.openProfilePage(accountPageUrl);
         objProfilePage.waitForLoadProfilePage();
@@ -90,33 +82,25 @@ public class TestProfilePage {
         objLoginPage.waitForLoadLoginPage();
 
 
-        // дождаться открытия страницы
-        // проверить, что открылась страница с первой формой для заполнения
         Assert.assertTrue("Не открылась страница авторизации", objLoginPage.checkLoginPageShown(loginPageUrl));
     }
 
     @Test
     @Step("Проверить переход по клику на «Конструктор» в личном кабинете")
     public void runTestConstructorLink() {
-// сначала надо создать клиента и авторизоваться
         ProfilePage objProfilePage = new ProfilePage(getWebDriver());
-        //        MainPage objMainPage = new MainPage(getWebDriver());
-//        objMainPage.openMainPage(mainPageUrl);
         objProfilePage.openProfilePage(accountPageUrl);
         objProfilePage.waitForLoadProfilePage();
 
         objMainPage.clickConstructorLink();
         objMainPage.waitForLoadMainPage();
 
-        // дождаться открытия страницы
-        // проверить, что открылась страница с первой формой для заполнения
         Assert.assertTrue("Не открылась главная страница", objMainPage.checkMainPageShown(mainPageUrl));
     }
 
     @Test
     @Step("Проверь переход в личном кабинете на логотип Stellar Burgers")
     public void runTestLogotypeLink() {
-// сначала надо создать клиента и авторизоваться
         ProfilePage objProfilePage = new ProfilePage(getWebDriver());
 
         objProfilePage.openProfilePage(accountPageUrl);
@@ -126,8 +110,6 @@ public class TestProfilePage {
         objProfilePage.clickStellarBurgersLink();
         objMainPage.waitForLoadMainPage();
 
-        // дождаться открытия страницы
-        // проверить, что открылась страница с первой формой для заполнения
         Assert.assertTrue("Не открылась страница главная страница", objMainPage.checkMainPageShown(mainPageUrl));
     }
 

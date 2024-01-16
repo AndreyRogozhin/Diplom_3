@@ -4,7 +4,6 @@ import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 
 
 public class TestMainPage {
@@ -13,7 +12,6 @@ public class TestMainPage {
     public BrowserRule browserRule = new BrowserRule();
     String mainPageUrl = Url.MAIN_PAGE;
     String loginPageUrl = Url.LOGIN_PAGE;
-    private WebDriver driver;
 
     @Test
     @Step("Вход по кнопке «Войти в аккаунт»")
@@ -72,17 +70,12 @@ public class TestMainPage {
     @Test
     @Step("Переход на закладку Начинки")
     public void runTestClickFillingTab() throws InterruptedException {
-// сначала надо создать клиента и авторизоваться
         MainPage objMainPage = new MainPage(browserRule.getWebDriver());
 
         objMainPage.openMainPage(mainPageUrl);
         objMainPage.clickDivisionFillingTab();
 
         Assert.assertTrue("Не получился переход на начинки", objMainPage.tabFillingIsCurrent());
-    }
-
-    public void tearDown() {
-        driver.quit();
     }
 
 

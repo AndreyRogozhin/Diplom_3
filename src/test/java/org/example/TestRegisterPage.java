@@ -21,9 +21,7 @@ public class TestRegisterPage {
     @Rule
     public BrowserRule browserRule = new BrowserRule();
     String registerPageUrl = Url.REGISTER_PAGE;
-    String mainPageUrl = Url.MAIN_PAGE;
     String loginPageUrl = Url.LOGIN_PAGE;
-    private WebDriver driver;
 
     @Test
     @Step("Успешная регистрация")
@@ -62,11 +60,8 @@ public class TestRegisterPage {
     public void runTestRegisterPageBadPassword() {
 
         RegisterPage objRegisterPage = new RegisterPage(browserRule.getWebDriver());
-        LoginPage objLoginPage = new LoginPage(browserRule.getWebDriver());
         objRegisterPage.openRegisterPage(registerPageUrl);
 
-
-        String registerPageUrl = Url.REGISTER_PAGE;
 
         objRegisterPage.setEmail("www2@yandex.ru");
         objRegisterPage.setName("fff");
@@ -82,10 +77,8 @@ public class TestRegisterPage {
     @Step("Вход через кнопку в форме регистрации")
     public void runTestEnterButtonLink() {
         RegisterPage objRegisterPage = new RegisterPage(browserRule.getWebDriver());
-        MainPage objMainPage = new MainPage(browserRule.getWebDriver());
         LoginPage objLoginPage = new LoginPage(browserRule.getWebDriver());
 
-        ProfilePage objProfilePage = new ProfilePage(browserRule.getWebDriver());
         objRegisterPage.openRegisterPage(registerPageUrl);
 
         objRegisterPage.clickEnterButton();

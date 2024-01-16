@@ -14,7 +14,6 @@ public class TestRecoverPasswordPage {
     public BrowserRule browserRule = new BrowserRule();
     String recoverPasswordPageUrl = Url.RECOVER_PASSWORD_PAGE;
     String loginPageUrl = Url.LOGIN_PAGE;
-    private WebDriver driver;
 
     @Test
     @Step("Вход через кнопку в форме восстановления пароля")
