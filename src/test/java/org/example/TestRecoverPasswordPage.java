@@ -12,8 +12,6 @@ public class TestRecoverPasswordPage {
 
     @Rule
     public BrowserRule browserRule = new BrowserRule();
-    String recoverPasswordPageUrl = Url.RECOVER_PASSWORD_PAGE;
-    String loginPageUrl = Url.LOGIN_PAGE;
 
     @Test
     @Step("Вход через кнопку в форме восстановления пароля")
@@ -21,10 +19,10 @@ public class TestRecoverPasswordPage {
 
         RecoverPasswordPage objRecoverPasswordPage = new RecoverPasswordPage(browserRule.getWebDriver());
         LoginPage objLoginPage = new LoginPage(browserRule.getWebDriver());
-        objRecoverPasswordPage.openRecoverPasswordPage(recoverPasswordPageUrl);
+        objRecoverPasswordPage.openRecoverPasswordPage(Url.RECOVER_PASSWORD_PAGE);
 
 
         objRecoverPasswordPage.clickLoginLink();
-        Assert.assertTrue("Не открылась страница авторизации", objLoginPage.checkLoginPageShown(loginPageUrl));
+        Assert.assertTrue("Не открылась страница авторизации", objLoginPage.checkLoginPageShown(Url.LOGIN_PAGE));
     }
 }

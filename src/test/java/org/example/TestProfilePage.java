@@ -20,9 +20,6 @@ import static org.example.apiobject.UserGenerator.randomUser;
 public class TestProfilePage {
 
 
-    String accountPageUrl = Url.ACCOUNT_PAGE;
-    String mainPageUrl = Url.MAIN_PAGE;
-    String loginPageUrl = Url.LOGIN_PAGE;
     String token;
     Response response;
     LoginPage objLoginPage;
@@ -58,7 +55,7 @@ public class TestProfilePage {
         objMainPage = new MainPage(getWebDriver());
 
 
-        objLoginPage.openLoginPage(loginPageUrl);
+        objLoginPage.openLoginPage(Url.LOGIN_PAGE);
 
         objLoginPage.waitForLoadLoginPage();
         objLoginPage.setEmail(user.getEmail());
@@ -75,27 +72,27 @@ public class TestProfilePage {
     @Step("Выход по кнопке «Выйти» в личном кабинете")
     public void runTestLogoutButton() {
         ProfilePage objProfilePage = new ProfilePage(getWebDriver());
-        objProfilePage.openProfilePage(accountPageUrl);
+        objProfilePage.openProfilePage(Url.ACCOUNT_PAGE);
         objProfilePage.waitForLoadProfilePage();
 
         objProfilePage.clickLogoutButton();
         objLoginPage.waitForLoadLoginPage();
 
 
-        Assert.assertTrue("Не открылась страница авторизации", objLoginPage.checkLoginPageShown(loginPageUrl));
+        Assert.assertTrue("Не открылась страница авторизации", objLoginPage.checkLoginPageShown(Url.LOGIN_PAGE));
     }
 
     @Test
     @Step("Проверить переход по клику на «Конструктор» в личном кабинете")
     public void runTestConstructorLink() {
         ProfilePage objProfilePage = new ProfilePage(getWebDriver());
-        objProfilePage.openProfilePage(accountPageUrl);
+        objProfilePage.openProfilePage(Url.ACCOUNT_PAGE);
         objProfilePage.waitForLoadProfilePage();
 
         objMainPage.clickConstructorLink();
         objMainPage.waitForLoadMainPage();
 
-        Assert.assertTrue("Не открылась главная страница", objMainPage.checkMainPageShown(mainPageUrl));
+        Assert.assertTrue("Не открылась главная страница", objMainPage.checkMainPageShown(Url.MAIN_PAGE));
     }
 
     @Test
@@ -103,14 +100,14 @@ public class TestProfilePage {
     public void runTestLogotypeLink() {
         ProfilePage objProfilePage = new ProfilePage(getWebDriver());
 
-        objProfilePage.openProfilePage(accountPageUrl);
+        objProfilePage.openProfilePage(Url.ACCOUNT_PAGE);
         objProfilePage.waitForLoadProfilePage();
 
 
         objProfilePage.clickStellarBurgersLink();
         objMainPage.waitForLoadMainPage();
 
-        Assert.assertTrue("Не открылась страница главная страница", objMainPage.checkMainPageShown(mainPageUrl));
+        Assert.assertTrue("Не открылась страница главная страница", objMainPage.checkMainPageShown(Url.MAIN_PAGE));
     }
 
 

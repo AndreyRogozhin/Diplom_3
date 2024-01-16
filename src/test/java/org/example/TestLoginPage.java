@@ -18,8 +18,6 @@ import static org.example.apiobject.UserGenerator.randomUser;
 
 public class TestLoginPage {
 
-    String mainPageUrl = Url.MAIN_PAGE;
-    String loginPageUrl = Url.LOGIN_PAGE;
     String token;
     private WebDriver driver;
     private Response response;
@@ -57,7 +55,7 @@ public class TestLoginPage {
 
         MainPage objMainPage = new MainPage(getWebDriver());
         LoginPage objLoginPage = new LoginPage(getWebDriver());
-        objLoginPage.openLoginPage(loginPageUrl);
+        objLoginPage.openLoginPage(Url.LOGIN_PAGE);
 
         objLoginPage.setEmail(user.getEmail());
         objLoginPage.setPassword(user.getPassword());
@@ -65,7 +63,7 @@ public class TestLoginPage {
 
 
         Thread.sleep(500, 0);
-        Assert.assertTrue("Не открылась главная страница сайта", objMainPage.checkMainPageShown(mainPageUrl));
+        Assert.assertTrue("Не открылась главная страница сайта", objMainPage.checkMainPageShown(Url.MAIN_PAGE));
     }
 
     @After

@@ -10,8 +10,6 @@ public class TestMainPage {
 
     @Rule
     public BrowserRule browserRule = new BrowserRule();
-    String mainPageUrl = Url.MAIN_PAGE;
-    String loginPageUrl = Url.LOGIN_PAGE;
 
     @Test
     @Step("Вход по кнопке «Войти в аккаунт»")
@@ -21,10 +19,10 @@ public class TestMainPage {
         LoginPage objLoginPage = new LoginPage(browserRule.getWebDriver());
 
 
-        objMainPage.openMainPage(mainPageUrl);
+        objMainPage.openMainPage(Url.MAIN_PAGE);
         objMainPage.clickEnterAccountButton();
 
-        Assert.assertTrue("Не открылась страница авторизации", objLoginPage.checkLoginPageShown(loginPageUrl));
+        Assert.assertTrue("Не открылась страница авторизации", objLoginPage.checkLoginPageShown(Url.LOGIN_PAGE));
     }
 
 
@@ -36,10 +34,10 @@ public class TestMainPage {
         LoginPage objLoginPage = new LoginPage(browserRule.getWebDriver());
 
 
-        objMainPage.openMainPage(mainPageUrl);
+        objMainPage.openMainPage(Url.MAIN_PAGE);
         objMainPage.clickEnterProfileLink();
 
-        Assert.assertTrue("Не открылась страница авторизации", objLoginPage.checkLoginPageShown(loginPageUrl));
+        Assert.assertTrue("Не открылась страница авторизации", objLoginPage.checkLoginPageShown(Url.LOGIN_PAGE));
     }
 
 
@@ -48,7 +46,7 @@ public class TestMainPage {
     public void runTestClickBunTab() throws InterruptedException {
         MainPage objMainPage = new MainPage(browserRule.getWebDriver());
 
-        objMainPage.openMainPage(mainPageUrl);
+        objMainPage.openMainPage(Url.MAIN_PAGE);
 
         objMainPage.clickDivisionFillingTab();
         objMainPage.clickDivisionBunTab();
@@ -61,7 +59,7 @@ public class TestMainPage {
     public void runTestClickSauceTab() throws InterruptedException {
         MainPage objMainPage = new MainPage(browserRule.getWebDriver());
 
-        objMainPage.openMainPage(mainPageUrl);
+        objMainPage.openMainPage(Url.MAIN_PAGE);
         objMainPage.clickDivisionSauceTab();
 
         Assert.assertTrue("Не получился переход на соусы", objMainPage.tabSauceIsCurrent());
@@ -72,7 +70,7 @@ public class TestMainPage {
     public void runTestClickFillingTab() throws InterruptedException {
         MainPage objMainPage = new MainPage(browserRule.getWebDriver());
 
-        objMainPage.openMainPage(mainPageUrl);
+        objMainPage.openMainPage(Url.MAIN_PAGE);
         objMainPage.clickDivisionFillingTab();
 
         Assert.assertTrue("Не получился переход на начинки", objMainPage.tabFillingIsCurrent());

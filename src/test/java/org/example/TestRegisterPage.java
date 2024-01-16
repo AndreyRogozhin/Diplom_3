@@ -20,8 +20,6 @@ public class TestRegisterPage {
 
     @Rule
     public BrowserRule browserRule = new BrowserRule();
-    String registerPageUrl = Url.REGISTER_PAGE;
-    String loginPageUrl = Url.LOGIN_PAGE;
 
     @Test
     @Step("Успешная регистрация")
@@ -37,7 +35,7 @@ public class TestRegisterPage {
 
         RegisterPage objRegisterPage = new RegisterPage(browserRule.getWebDriver());
         LoginPage objLoginPage = new LoginPage(browserRule.getWebDriver());
-        objRegisterPage.openRegisterPage(registerPageUrl);
+        objRegisterPage.openRegisterPage(Url.REGISTER_PAGE);
 
         objRegisterPage.setEmail(credentials.getEmail());
         objRegisterPage.setPassword(credentials.getPassword());
@@ -46,7 +44,7 @@ public class TestRegisterPage {
         objRegisterPage.clickRegisterButton();
         objLoginPage.waitForLoadLoginPage();
 
-        Assert.assertTrue("Не открылась страница авторизации", objLoginPage.checkLoginPageShown(loginPageUrl));
+        Assert.assertTrue("Не открылась страница авторизации", objLoginPage.checkLoginPageShown(Url.LOGIN_PAGE));
 
         response = userClient.login(credentials);
         String token = response.path("accessToken");
@@ -60,7 +58,7 @@ public class TestRegisterPage {
     public void runTestRegisterPageBadPassword() {
 
         RegisterPage objRegisterPage = new RegisterPage(browserRule.getWebDriver());
-        objRegisterPage.openRegisterPage(registerPageUrl);
+        objRegisterPage.openRegisterPage(Url.REGISTER_PAGE);
 
 
         objRegisterPage.setEmail("www2@yandex.ru");
@@ -79,12 +77,12 @@ public class TestRegisterPage {
         RegisterPage objRegisterPage = new RegisterPage(browserRule.getWebDriver());
         LoginPage objLoginPage = new LoginPage(browserRule.getWebDriver());
 
-        objRegisterPage.openRegisterPage(registerPageUrl);
+        objRegisterPage.openRegisterPage(Url.REGISTER_PAGE);
 
         objRegisterPage.clickEnterButton();
         objLoginPage.waitForLoadLoginPage();
 
-        Assert.assertTrue("Не открылась страница авторизации", objLoginPage.checkLoginPageShown(loginPageUrl));
+        Assert.assertTrue("Не открылась страница авторизации", objLoginPage.checkLoginPageShown(Url.LOGIN_PAGE));
 
     }
 
